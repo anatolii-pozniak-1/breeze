@@ -12,8 +12,8 @@
             const email = document.getElementById('email').value;
 
             // Construct deep link with query parameters (optional)
-            // const deepLink = `app://open.breeze.app?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
-            const deepLink = `myapp://open?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
+            const deepLink = `app://open.breeze.app?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
+            // const deepLink = `https://www.breeze.com/get?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
 
             // Trigger deep link to open the app
             window.location.href = deepLink;
