@@ -4,33 +4,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Link Form</title>
-    <script>
-        // Function to open the app via deep link and pass some initial data
-        function openApp() {
-            const surname = document.getElementById('surname').value;
-            const email = document.getElementById('email').value;
-
-            // Construct deep link with query parameters (optional)
-            const deepLink = `app://open.breeze.app?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
-            // const deepLink = `https://www.breeze.com/get?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
-
-            // Trigger deep link to open the app
-            window.location.href = deepLink;
+    <title>Checkout Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .order-summary img {
+            width: 100%;
+            height: auto;
         }
+    </style>
+</head>
 
+<body>
+    <div class="container mt-5">
+        <!-- Order Summary Block -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h4">Order Summary</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="https://nb.scene7.com/is/image/NB/m1906rer_nb_02_i?$pdpflexf22x$&qlt=80&fmt=webp&wid=880&hei=880"
+                            class="img-fluid" alt="Shoe Image">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="shoe-quantity" class="form-label">Quantity:</label>
+                            <input type="number" class="form-control" id="shoe-quantity" name="shoe-quantity" min="1"
+                                value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="shoe-price" class="form-label">Price:</label>
+                            <input type="text" class="form-control" id="shoe-price" name="shoe-price" value="$154.99"
+                                readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="shoe-info" class="form-label">Shoe Info:</label>
+                            <textarea class="form-control" id="shoe-info" name="shoe-info" rows="4" readonly>
+New Balance 1906R
+Unisex
+
+Color: Silver Metallic with Black and Sea Salt
+
+Size: M12 / W13.5 Width: Standard
+Qty: 1 @ $154.99
+$154.99
+                        </textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Info Block -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h4">Customer Info</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="customer-surname" class="form-label">Surname:</label>
+                            <input type="text" class="form-control" id="customer-surname" name="customer-surname"
+                                placeholder="Enter your surname">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="customer-name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="customer-name" name="customer-name"
+                                placeholder="Enter your name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="customer-phone" class="form-label">Phone:</label>
+                            <input type="tel" class="form-control" id="customer-phone" name="customer-phone"
+                                placeholder="Enter your phone number">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="customer-email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="customer-email" name="customer-email"
+                                placeholder="Enter your email">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Block -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h4">Shipping</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="shipping-city" class="form-label">City:</label>
+                    <select class="form-control" id="shipping-city" name="shipping-city">
+                        <option value="kyiv">Kyiv</option>
+                        <option value="kharkiv">Kharkiv</option>
+                        <option value="odessa">Odessa</option>
+                        <option value="dnipro">Dnipro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="shipping-warehouse" class="form-label">Warehouse Address:</label>
+                    <input type="text" class="form-control" id="shipping-warehouse" name="shipping-warehouse"
+                        placeholder="Enter warehouse address">
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Block -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h4">Payment</h2>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="payment-method" class="form-label">Payment Method:</label>
+                    <select class="form-control" id="payment-method" name="payment-method">
+                        <option value="credit-card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                        <option value="cash-on-delivery">Cash on Delivery</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place Order Button -->
+        <div class="text-center">
+            <button type="button" class="btn btn-success btn-lg" onclick="placeOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
         // Function to handle the result sent back from the app
         function updateFromApp(params) {
-            // Example: Update the form fields with values from the app
             const urlParams = new URLSearchParams(params);
             const surname = urlParams.get('surname');
+            const name = urlParams.get('name');
             const email = urlParams.get('email');
+            const phone = urlParams.get('phone');
+            const city = urlParams.get('city');
+            const address = urlParams.get('address');
 
             if (surname) {
-                document.getElementById('surname').value = surname;
+                document.getElementById('customer-surname').value = surname;
+            }
+            if (name) {
+                document.getElementById('customer-name').value = name;
             }
             if (email) {
-                document.getElementById('email').value = email;
+                document.getElementById('customer-email').value = email;
+            }
+            if (phone) {
+                document.getElementById('customer-phone').value = phone;
+            }
+            if (city) {
+                document.getElementById('shipping-city').value = city;
+            }
+            if (address) {
+                document.getElementById('shipping-warehouse').value = address;
             }
         }
 
@@ -41,20 +187,11 @@
                 updateFromApp(params);
             }
         };
+
+        function placeOrder() {
+            alert('Order placed successfully!');
+        }
     </script>
-</head>
-
-<body>
-    <h1>Deep Link Form</h1>
-    <form id="form">
-        <label for="surname">Surname:</label><br>
-        <input type="text" id="surname" name="surname" placeholder="Enter surname"><br><br>
-
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" placeholder="Enter email"><br><br>
-
-        <button type="button" onclick="openApp()">Open App</button>
-    </form>
 </body>
 
 </html>
