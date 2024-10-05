@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Link Form</title>
+    <script>
+        // Function to open the app via deep link and pass some initial data
+        function openApp() {
+            const surname = document.getElementById('surname').value;
+            const email = document.getElementById('email').value;
+
+            // Construct deep link with query parameters (optional)
+            const deepLink = `myapp://open?surname=${encodeURIComponent(surname)}&email=${encodeURIComponent(email)}`;
+
+            // Trigger deep link to open the app
+            window.location.href = deepLink;
+        }
+
+        // Function to handle the result sent back from the app
+        function updateFromApp(params) {
+            // Example: Update the form fields with values from the app
+            const urlParams = new URLSearchParams(params);
+            const surname = urlParams.get('surname');
+            const email = urlParams.get('email');
+
+            if (surname) {
+                document.getElementById('surname').value = surname;
+            }
+            if (email) {
+                document.getElementById('email').value = email;
+            }
+        }
+
+        // On page load, check if there are parameters returned from the app
+        window.onload = function () {
+            const params = window.location.search;
+            if (params) {
+                updateFromApp(params);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <h1>Deep Link Form</h1>
+    <form id="form">
+        <label for="surname">Surname:</label><br>
+        <input type="text" id="surname" name="surname" placeholder="Enter surname"><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter email"><br><br>
+
+        <button type="button" onclick="openApp()">Open App</button>
+    </form>
+</body>
+
+</html>
